@@ -12,9 +12,20 @@ export class AppComponent {
   constructor(public msgService: MessageService) {}
   subscription: Subscription;
   msg: string;
+  data: string;
   ngOnInit() {
     this.subscription = this.msgService.message.subscribe(msg => {
       this.msg = msg;
+    });
+    this.getData();
+  }
+  ngOnDestory() {
+    this.subscription.unsubscribe();
+  }
+
+  getData() {
+    this.msgService.msg.subscribe(data => {
+      this.data = data;
     });
   }
 }
